@@ -1,6 +1,9 @@
 #!/bin/bash
 
-cd /Users/valerio/Desktop/Courses/email-crawler
+working_dir="/Users/valerio/Desktop/Courses/email-crawler"
+
+# Change to the specified working directory
+cd "$working_dir" || exit
 
 # Log the current working directory to ensure the script runs in the correct location
 echo "Current working directory: $(pwd)"
