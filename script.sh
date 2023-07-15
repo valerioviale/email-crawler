@@ -1,8 +1,7 @@
 #!/bin/bash
 
-working_dir="/Users/valerio/Desktop/Courses/email-crawler"
-
 # Change to the specified working directory
+working_dir="/Users/valerio/Desktop/Courses/email-crawler"
 cd "$working_dir" || exit
 
 # Log the current working directory to ensure the script runs in the correct location
@@ -17,3 +16,4 @@ git commit -m "$commit_message"
 
 # Push changes
 git push
+
