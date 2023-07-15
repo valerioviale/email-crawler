@@ -12,8 +12,9 @@ git add .
 
 # Check if there are changes to commit
 if git diff --quiet --exit-code; then
-    # No changes, so stage an empty file
+    # No changes, so create an empty file with the date stamp
     touch empty.txt
+    echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
     git add empty.txt
 fi
 
