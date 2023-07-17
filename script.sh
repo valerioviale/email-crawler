@@ -1,26 +1,19 @@
 #!/bin/bash
 
-# Change to the specified working directory
-working_dir="/Users/valerio/Desktop/Courses/GitAuto"
-cd "$working_dir" || exit
+# List of commit messages
+messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
 
-# Log the current working directory to ensure the script runs in the correct location
-echo "Current working directory: $(pwd)"
+# Generate a random index to select a commit message
+index=$(( RANDOM % 5 ))
 
-# Add all changes
-git add .
+# Select the commit message
+message=${messages[$index]}
 
-# Check if there are changes to commit
-if git diff --quiet --exit-code; then
-    # No changes, so create an empty file with the date stamp
-    touch empty.txt
-    echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
-    git add empty.txt
-fi
+# Add all files to the staging area
+git add -A
 
-# Commit changes with a timestamp
-commit_message="Daily commit - $(date +"%Y-%m-%d %H:%M:%S")"
-git commit -m "$commit_message"
+# Commit with the randomly chosen message
+git commit -m "$message"
 
-# Push changes
-git push
+# Push to the remote repository (assuming the remote is named 'origin' and the branch is 'master')
+git push origin master
