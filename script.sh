@@ -3,6 +3,10 @@
 # List of commit messages
 messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
 
+# Change to the specified working directory
+working_dir="/Users/valerio/Desktop/Courses/email-crawler"
+cd "$working_dir" || exit
+
 # Generate a random index to select a commit message
 index=$(( RANDOM % 5 ))
 
