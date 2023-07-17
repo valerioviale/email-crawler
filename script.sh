@@ -7,15 +7,6 @@ cd "$working_dir" || exit
 # Log the current working directory to ensure the script runs in the correct location
 echo "Current working directory: $(pwd)"
 
-# List of commit messages
-messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
-
-# Generate a random index to select a commit message
-index=$(( RANDOM % 5 ))
-
-# Select the commit message
-message=${messages[$index]}
-
 # Add all changes
 /usr/bin/git add .
 
@@ -27,12 +18,9 @@ if /usr/bin/git diff --quiet --exit-code; then
     /usr/bin/git add empty.txt
 fi
 
-# Commit changes with the randomly chosen message
-commit_message="Random commit - $message"
+# Commit changes with a timestamp
+commit_message="Daily commit - $(date +"%Y-%m-%d %H:%M:%S")"
 /usr/bin/git commit -m "$commit_message"
-
-# Pull the latest changes from the remote repository
-/usr/bin/git pull
 
 # Push changes
 /usr/bin/git push
