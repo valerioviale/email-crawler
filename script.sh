@@ -10,26 +10,42 @@ echo "Current working directory: $(pwd)"
 # List of commit messages
 messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
 
-# Generate a random index to select a commit message
-index=$(( RANDOM % 5 ))
+# Specify the name of the remote branch
+remote_branch="main"
 
-# Select the commit message
-message=${messages[$index]}
+# Create a new branch with a random name
+branch_name="autocommit-$(date +"%Y%m%d%H%M%S")"
+/usr/bin/git checkout -b "$branch_name"
 
-# Add all changes
-/usr/bin/git add .
+# Loop to perform five commits
+for ((i=0; i<5; i++))
+do
+    # Add all changes
+    /usr/bin/git add .
 
-# Check if there are changes to commit
-if /usr/bin/git diff --quiet --exit-code; then
-    # No changes, so create an empty file with the date stamp
-    touch empty.txt
-    echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
-    /usr/bin/git add empty.txt
-fi
+    # Check if there are changes to commit
+    if /usr/bin/git diff --quiet --exit-code; then
+        # No changes, so create an empty file with the date stamp
+        touch empty.txt
+        echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
+        /usr/bin/git add empty.txt
+    fi
 
-# Commit changes with the randomly chosen message
-commit_message="Random commit - $message"
-/usr/bin/git commit -m "$commit_message"
+    # Generate a random index to select a commit message
+    index=$(( RANDOM % 5 ))
 
-# Push changes
-/usr/bin/git push
+    # Select the commit message
+    commit_message="${messages[$index]} - $(date +"%Y-%m-%d %H:%M:%S")"
+    
+    # Commit changes with the randomly chosen message
+    /usr/bin/git commit -m "$commit_message"
+done
+
+# Pull the latest changes from the remote branch
+/usr/bin/git pull origin "$remote_branch"
+
+# Push changes to the specified remote branch
+/usr/bin/git push origin "$branch_name":"$remote_branch"
+
+# Switch back to the main branch
+/usr/bin/git switch main
