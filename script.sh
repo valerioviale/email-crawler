@@ -40,5 +40,5 @@ do
     /usr/bin/git commit -m "$commit_message"
 done
 
-# Push changes to the specified remote branch
+# Push changes to the remote branch
 /usr/bin/git push origin "$remote_branch"
