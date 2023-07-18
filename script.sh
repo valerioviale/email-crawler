@@ -8,7 +8,11 @@ cd "$working_dir" || exit
 echo "Current working directory: $(pwd)"
 
 # List of commit messages
+<<<<<<< HEAD
 messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
+=======
+messages=("New feature" "Documentation" "Bug Fix" "Test" "Some stuff")
+>>>>>>> 32b03adacbaaa7fc879acf091fbecfb5b3d9834b
 
 # Specify the name of the remote branch
 remote_branch="main"
@@ -41,6 +45,7 @@ do
     /usr/bin/git commit -m "$commit_message"
 done
 
+<<<<<<< HEAD
 # Pull the latest changes from the remote branch
 /usr/bin/git pull origin "$remote_branch"
 
@@ -49,3 +54,10 @@ done
 
 # Switch back to the main branch
 /usr/bin/git switch main
+=======
+# Push changes to the specified remote branch
+/usr/bin/git push origin "$branch_name":"$remote_branch"
+
+# Switch back to the previous branch
+/usr/bin/git checkout -
+>>>>>>> 32b03adacbaaa7fc879acf091fbecfb5b3d9834b
