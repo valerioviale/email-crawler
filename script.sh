@@ -7,23 +7,38 @@ cd "$working_dir" || exit
 # Log the current working directory to ensure the script runs in the correct location
 echo "Current working directory: $(pwd)"
 
-# Log the current working directory to ensure the script runs in the correct location
-echo "Current working directory: $(pwd)"
+# List of commit messages
+messages=("New feature" "Documentation" "Bug Fix" "Test" "Some stuff")
 
-# Add all changes
-/usr/bin/git add .
+# Specify the name of the remote branch
+remote_branch="main"
 
-# Check if there are changes to commit
-if /usr/bin/git diff --quiet --exit-code; then
-    # No changes, so create an empty file with the date stamp
-    touch empty.txt
-    echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
-    /usr/bin/git add empty.txt
-fi
+# Pull the latest changes from the remote branch
+/usr/bin/git pull origin "$remote_branch"
 
-# Commit changes with a timestamp
-commit_message="Daily commit - $(date +"%Y-%m-%d %H:%M:%S")"
-/usr/bin/git commit -m "$commit_message"
+# Loop to perform five commits
+for ((i=0; i<5; i++))
+do
+    # Add all changes
+    /usr/bin/git add .
 
-# Push changes
-/usr/bin/git push
+    # Check if there are changes to commit
+    if /usr/bin/git diff --quiet --exit-code; then
+        # No changes, so create an empty file with the date stamp
+        touch empty.txt
+        echo "Date: $(date +"%Y-%m-%d %H:%M:%S")" >> empty.txt
+        /usr/bin/git add empty.txt
+    fi
+
+    # Generate a random index to select a commit message
+    index=$(( RANDOM % 5 ))
+
+    # Select the commit message
+    commit_message="${messages[$index]} - $(date +"%Y-%m-%d %H:%M:%S")"
+    
+    # Commit changes with the randomly chosen message
+    /usr/bin/git commit -m "$commit_message"
+done
+
+# Push changes to the remote branch
+/usr/bin/git push origin "$remote_branch"
