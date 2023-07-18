@@ -8,11 +8,7 @@ cd "$working_dir" || exit
 echo "Current working directory: $(pwd)"
 
 # List of commit messages
-<<<<<<< HEAD
-messages=("Initial commit" "Update README.md" "Fix bug" "Add new feature" "Refactor code")
-=======
 messages=("New feature" "Documentation" "Bug Fix" "Test" "Some stuff")
->>>>>>> 32b03adacbaaa7fc879acf091fbecfb5b3d9834b
 
 # Specify the name of the remote branch
 remote_branch="main"
