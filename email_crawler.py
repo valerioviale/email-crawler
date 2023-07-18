@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from openpyxl import Workbook
 
 domains = [
-    'immobiliare.it'
+    'immobiliare.it/vendita-case/milano/metro-maciachini'
     # Add more domains here...
 ]
 
