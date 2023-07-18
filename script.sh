@@ -13,6 +13,10 @@ messages=("New feature" "Documentation" "Bug Fix" "Test" "Some stuff")
 # Specify the name of the remote branch
 remote_branch="main"
 
+# Create a new branch with a random name
+branch_name="autocommit-$(date +"%Y%m%d%H%M%S")"
+/usr/bin/git checkout -b "$branch_name"
+
 # Loop to perform five commits
 for ((i=0; i<5; i++))
 do
@@ -35,7 +39,10 @@ do
     
     # Commit changes with the randomly chosen message
     /usr/bin/git commit -m "$commit_message"
-
-    # Push changes
-    /usr/bin/git push
 done
+
+# Push changes to the specified remote branch
+/usr/bin/git push origin "$branch_name":"$remote_branch"
+
+# Switch back to the previous branch
+/usr/bin/git checkout -
