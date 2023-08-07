@@ -24,7 +24,7 @@ for domain in domains:
         driver.get(url)
 
         # Find all links containing the words "contatti" or "info" or "contact" or "contacts" the href attribute
-        contact_links = WebDriverWait(driver, 10).until(
+        contact_links = WebDriverWait(driver, 6).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[contains(@href, "contactos") or contains(@href, "info") or contains(@href, "contact") or contains(@href, "contacts")]'))
         )
 
