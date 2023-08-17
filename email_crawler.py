@@ -30,7 +30,7 @@ for domain in domains:
         driver.get(url)
 
         # Find all links containing the words "contatti" or "info" or "contact" or "contacts" the href attribute
-        contact_links = WebDriverWait(driver, 10).until(
+        contact_links = WebDriverWait(driver, 2).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[contains(@href, "contactos") or contains(@href, "info") or contains(@href, "contact") or contains(@href, "contacts")]'))
         )
 
@@ -40,7 +40,7 @@ for domain in domains:
             driver.get(contact_url)
 
             # Wait for the page to load and find all elements containing email addresses
-            email_elements = WebDriverWait(driver, 10).until(
+            email_elements = WebDriverWait(driver, 2).until(
                 EC.presence_of_all_elements_located((By.XPATH, '//a[contains(@href, "mailto:")]'))
             )
 
@@ -53,7 +53,7 @@ for domain in domains:
     except Exception as e:
         print(f"Error processing domain '{domain}': {str(e)}")
 
-    time.sleep(3)  # Delay for 3 seconds between each domain
+    time.sleep(1)  # Delay for 3 seconds between each domain
 
 # Create an Excel workbook and sheet
 workbook = Workbook()
