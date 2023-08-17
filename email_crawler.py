@@ -8,9 +8,14 @@ from webdriver_manager.firefox import GeckoDriverManager
 from openpyxl import Workbook
 
 domains = [
-    'unica.it',
-    'wikipedia.org',
-    'w3schools.com'
+    "	https://mercatoelettrico.org	"	,
+"	https://www.eni.com	"	,
+"	https://www.stellantis.com	"	,
+"	https://globaltrading.enel.com	"	,
+"	https://www.eni.com	"	,
+"	https://www.gse.it	"	,
+"	https://www.enel.it	"	,
+"	https://www.engie.it	"	
     # Add more domains here...
 ]
 
@@ -21,7 +26,7 @@ driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())  # st
 
 for domain in domains:
     try:
-        url = 'http://www.' + domain
+        url = domain
         driver.get(url)
 
         # Find all links containing the words "contatti" or "info" or "contact" or "contacts" the href attribute
