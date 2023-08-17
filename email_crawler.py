@@ -1,22 +1,23 @@
 import re
 import time
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 from openpyxl import Workbook
 
 domains = [
-    'unica.it'
+    'unica.it',
+    'wikipedia.org',
+    'w3schools.com'
     # Add more domains here...
 ]
 
 email_set = set()
 
-# Set up Selenium WebDriver (ensure you have the appropriate driver executable for your browser installed)
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # starts the webdriver
+# Set up Selenium WebDriver
+driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())  # starts the webdriver
 
 for domain in domains:
     try:
@@ -24,7 +25,7 @@ for domain in domains:
         driver.get(url)
 
         # Find all links containing the words "contatti" or "info" or "contact" or "contacts" the href attribute
-        contact_links = WebDriverWait(driver, 6).until(
+        contact_links = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[contains(@href, "contactos") or contains(@href, "info") or contains(@href, "contact") or contains(@href, "contacts")]'))
         )
 
@@ -60,5 +61,5 @@ for index, email in enumerate(email_set, start=1):
 # Save the workbook to a file
 workbook.save('email_addresses.xlsx')
 
-# Close the Selenium WebDriver
+# Close the WebDriver
 driver.quit()
